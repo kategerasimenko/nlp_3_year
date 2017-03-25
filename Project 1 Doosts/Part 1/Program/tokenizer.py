@@ -68,7 +68,6 @@ def spacing(text):
     return text
 
 def separate_word(tokens):
-    #смайлики
     punc = re.compile('[,!?"()]')
     new_tokens = []
     for token in tokens:
@@ -113,7 +112,6 @@ def tokenizer(sentences,borders,not_separate,separate,output,mode):
         tokens = separate_word(strip_punc(whitespace(new_text)))
         tokens = hyphens(tokens,not_separate,separate)
         s_start = borders[i][0]
-        #print([s],borders[i],tokens)
         t_borders = find_borders(s,tokens)
         t_borders = [(x[0] + s_start,x[1] + s_start) for x in t_borders]
         for j in range(len(tokens)):
@@ -147,7 +145,6 @@ def split_into_sent(text,sh):
 def find_borders(text,sentences):
     borders = []
     for sentence in sentences:
-        #print([sentence])
         first = re.search('((^.*?)'+re.escape(sentence)+')',text,flags=re.DOTALL)
         if first is None: #бывает в случае схлопнутых токенов
             sentence = ' '.join(sentence)
@@ -159,7 +156,6 @@ def find_borders(text,sentences):
         end = start + len(sentence)
         borders.append((start,end))
         text = text[len(first.group(1)):]
-        #print(sentence,borders[-1])
     return borders
     
 def splitter(text,sh,output,mode):
@@ -202,9 +198,5 @@ def tests(separate,not_separate,sokr):
             tokenizer(sent,bor,not_separate,separate,'test'+str(i)+'_output.txt','a')
     
 separate,not_separate,sokr = read_lists('separate.txt','not_to_separate.txt','sokr.txt')
-#s = ' So, B. R. Obama decides to organise an actual race. He says to Trump and Hillary:"The one, who will run around White House and be the fastest will win election."Hillary running first. Obama fires in air and she goes. After around 20 minutes she finishes her run sweating and almost dying. Obama nodes, and tell Trump to get ready.Barack fires again. Trump litterally shoots from start, his wig flies of his head. Time passes, and he comes back, sweat and autotan dripping from him. Obama looks at the time: 13 minutes."HELL YEAH, I WIN! Suck it Hillary, you stupid bitch!" - Trump says."Yeah, yeah, my congratulations, Donald" - Obama answer him with grim face."Damn, whoa... I was fast! Didn\'t I set some kind of record?" - asks Trump. Obama answers: "No. Bush did 9:11."' 
 s = open('clear_anek_corporas.txt','r',encoding='utf-8').read()
-#s = open('words.txt','r',encoding='utf-8').read()
 analyze(s,separate,not_separate,sokr)
-
-tests(separate,not_separate,sokr)
