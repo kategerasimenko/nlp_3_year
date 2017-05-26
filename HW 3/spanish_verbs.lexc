@@ -1,6 +1,10 @@
 Multichar_Symbols +INF +PRS1SG +PRS2SG +PRS3SG +PRS1PL +PRS2PL +PRS3PL
 
-LEXICON VerbStems
+LEXICON Root
+
+Verbs ;
+
+LEXICON Verbs
 
 pedir   Infl;
 medir   Infl;
