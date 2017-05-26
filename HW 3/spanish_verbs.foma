@@ -1,0 +1,10 @@
+read lexc spanish_verbs.lexc
+define Lexicon;
+define DeleteInf i r -> 0 || _ "^";
+define ChangeStressed e -> i || _ ? "^" [? - [i | I]];
+define Cleanup "^" -> 0;
+
+regex Lexicon .o.
+      DeleteInf .o.
+      ChangeStressed .o.
+      Cleanup;
